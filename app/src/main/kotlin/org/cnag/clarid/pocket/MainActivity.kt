@@ -145,7 +145,7 @@ private fun PocketScreen(model: PocketViewModel = viewModel()) {
             sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true)) {
             Column(Modifier.fillMaxWidth().verticalScroll(rememberScrollState()).padding(20.dp),
                 verticalArrangement = Arrangement.spacedBy(16.dp)) {
-                ConfigurationCard(state, model::configure)
+                ConfigurationCard(state, model::configure, model::checkForUpdates)
                 TextButton(onClick = { settingsOpen = false }, modifier = Modifier.align(Alignment.End)) {
                     Text("Done")
                 }
@@ -231,7 +231,9 @@ private fun PocketScreen(model: PocketViewModel = viewModel()) {
 }
 
 @Composable
-private fun ConfigurationCard(state: PocketState, onChange: (DecodeSettings) -> Unit) {
+private fun ConfigurationCard(state: PocketState, onChange: (DecodeSettings) -> Unit, onCheckUpdates: () -> Unit) {
+    val context = LocalContext.current
+    var browserError by remember { mutableStateOf(false) }
     val settings = state.settings
     val enabled = state.ready && !state.processing
     var advanced by rememberSaveable { mutableStateOf(false) }
@@ -287,6 +289,27 @@ private fun ConfigurationCard(state: PocketState, onChange: (DecodeSettings) -> 
                 Text("About", style = MaterialTheme.typography.titleSmall)
             }
             Text("App version: " + BuildConfig.VERSION_NAME,
+                style = MaterialTheme.typography.bodyMedium)
+            OutlinedButton(onClick = { browserError = false; onCheckUpdates() },
+                enabled = !state.checkingUpdates, modifier = Modifier.fillMaxWidth()) {
+                Text(if (state.checkingUpdates) "Checking…" else "Check for updates")
+            }
+            state.appUpdate?.let { update ->
+                Text(update.message, style = MaterialTheme.typography.bodyMedium,
+                    modifier = Modifier.semantics { liveRegion = LiveRegionMode.Polite })
+                update.downloadPage?.let { page ->
+                    Button(onClick = {
+                        try {
+                            context.startActivity(Intent(Intent.ACTION_VIEW, page.toUri()))
+                            browserError = false
+                        } catch (_: android.content.ActivityNotFoundException) {
+                            browserError = true
+                        }
+                    }, modifier = Modifier.fillMaxWidth()) { Text("Open download page") }
+                }
+            }
+            if (browserError) Text("No browser is available to open GitHub.")
+            Text("Checks app releases on GitHub. Scanning stays offline.",
                 style = MaterialTheme.typography.bodyMedium)
             Text("Bundled codebook · " + state.revision.ifEmpty { "Loading…" },
                 style = MaterialTheme.typography.bodySmall)

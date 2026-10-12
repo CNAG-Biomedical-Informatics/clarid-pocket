@@ -105,8 +105,8 @@ lint, and core tests do not replace these camera and visual checks.
 - The injected Not Available species stub has a different width from the other
   species stubs; it is not supported in this initial fixed-width stub decoder.
 - The scanning model and codebooks are bundled. Camera is the only requested
-  Android runtime permission; Internet and network-state permissions are removed
-  from the merged manifest. There is no app backend, app analytics, or identifier
+  Android runtime permission. Internet permission supports manual app-update checks;
+  network-state permission is removed from the merged manifest. There is no app backend, app analytics, or identifier
   logging. Only decoding settings are persisted; scans are held in memory.
 - The app stores no scan history. Backup and device transfer are disabled.
 
@@ -132,7 +132,7 @@ storage. Starting another scan or changing settings clears the current result;
 process termination also loses it.
 
 The codebook, schema, ICD-10 dictionaries, and barcode model are packaged inside
-the APK. They are not downloaded at runtime. The app has no Internet permission.
+the APK. They are not downloaded at runtime. Internet permission is used only for the manual app-update check.
 Cloud backup and device transfer are excluded by the manifest and data-extraction
 rules. Uninstalling the app or clearing its storage removes the saved settings.
 Normal updates signed with the same key preserve them.
@@ -195,3 +195,22 @@ Release packaging fails if the signing setup is missing.
 The first release-key APK requires uninstalling an existing debug-key build
 before installation. This clears its saved settings. Subsequent release-key
 updates install over the existing app.
+
+## App update checks
+
+Settings → About → Check for updates makes an unauthenticated HTTPS request to
+`https://api.github.com/repos/CNAG-Biomedical-Informatics/clarid-pocket/releases/latest`.
+It runs only on demand, with connection/read timeouts and a bounded response size.
+No QR content, decoding settings, identifiers, credentials, or analytics are sent.
+GitHub receives the normal network request (including the device's public IP).
+
+Only stable published releases with numeric `vMAJOR.MINOR.PATCH` tags and an
+uploaded `clarid-pocket-MAJOR.MINOR.PATCH.apk` are offered. Versions are compared
+numerically, never lexicographically, and older versions are not offered.
+No public release, throttling, connection errors, and malformed data have distinct
+messages. Checks do not change the active codebook. Nothing runs on app startup.
+The download button opens the official release page in a browser; the app does
+not download or install APKs itself. Android enforces the signing key on updates.
+
+`AppUpdatesTest` covers newer/current/older versions, unavailable APKs, malformed
+metadata, drafts/prereleases, no published release, rate limiting, and retries.

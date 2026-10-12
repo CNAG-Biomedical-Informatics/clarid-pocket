@@ -20,6 +20,8 @@ import org.cnag.clarid.core.IdentifierFormat
 import org.cnag.clarid.core.ReferenceData
 
 data class PocketState(
+    val checkingUpdates: Boolean = false,
+    val appUpdate: AppUpdate? = null,
     val loading: Boolean = true,
     val ready: Boolean = false,
     val settings: DecodeSettings = DecodeSettings(),
@@ -56,6 +58,19 @@ class PocketViewModel(application: Application) : AndroidViewModel(application) 
                     it.copy(loading = false,
                         error = "The bundled codebook could not be loaded. Restart or reinstall the app.")
                 }
+            }
+        }
+    }
+
+    fun checkForUpdates() {
+        if (state.value.checkingUpdates) return
+        mutableState.update { it.copy(checkingUpdates = true, appUpdate = null) }
+        viewModelScope.launch {
+            try {
+                val result = withContext(Dispatchers.IO) { AppUpdates().check(BuildConfig.VERSION_NAME) }
+                mutableState.update { it.copy(appUpdate = result) }
+            } finally {
+                mutableState.update { it.copy(checkingUpdates = false) }
             }
         }
     }

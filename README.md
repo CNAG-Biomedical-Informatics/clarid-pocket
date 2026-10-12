@@ -13,7 +13,7 @@ codes and labels. Works offline on **Android 8 or newer**.
 3. Open **ClarID Pocket** and tap **Scan QR**. Allow camera access when asked.
 
 You do not need Android Studio or a USB connection to use the app.
-The first signed release is being prepared as a draft.
+Downloads are available when a release is published.
 To update, open a newer APK signed with the same key and install it over the
 existing app.
 
@@ -38,6 +38,9 @@ the label; Auto does not infer them.
 
 Supports **ClarID 0.04** with the bundled codebook, in Human and Stub formats.
 Older ClarID releases and codebook downloads are not supported.
+In **Settings → About**, **Check for updates** checks published app releases on
+GitHub and offers a download page for newer versions. This optional check needs
+internet; it never uploads scanned identifiers.
 Scanning works without internet, and the app keeps no scan history.
 
 [Developer instructions](DEVELOPMENT.md) ·

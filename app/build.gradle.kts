@@ -28,8 +28,8 @@ android {
         applicationId = "org.cnag.clarid.pocket"
         minSdk = 26
         targetSdk = 36
-        versionCode = 10
-        versionName = "0.1.8"
+        versionCode = 11
+        versionName = "0.1.9"
     }
     signingConfigs {
         create("release") {
@@ -56,6 +56,7 @@ kotlin { compilerOptions { jvmTarget.set(org.jetbrains.kotlin.gradle.dsl.JvmTarg
 
 dependencies {
     implementation(project(":core"))
+    implementation("com.google.code.gson:gson:2.13.2")
     implementation(platform("androidx.compose:compose-bom:2025.11.01"))
     implementation("androidx.compose.ui:ui")
     implementation("androidx.compose.foundation:foundation")
