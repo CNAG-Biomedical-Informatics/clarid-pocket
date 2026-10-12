@@ -134,7 +134,6 @@ The ARM64 SDK comes from
 [android-sdk-custom release 37.0.0](https://github.com/HomuHomu833/android-sdk-custom/releases/tag/37.0.0).
 It is a community build, not an official Linux ARM64 Android Studio release.
 Its downloaded archive checksum is recorded in the SDK's
-`CLARID_INSTALL_SOURCE.json`; see `SESSION_NOTES.md` for the installation details.
+`CLARID_INSTALL_SOURCE.json`.
 
-See [the implementation plan](clarid-pocket-plan.md) for subsequent milestones
-and [third-party notices](THIRD_PARTY_NOTICES.md) for bundled data provenance.
+See [third-party notices](THIRD_PARTY_NOTICES.md) for bundled data provenance.
