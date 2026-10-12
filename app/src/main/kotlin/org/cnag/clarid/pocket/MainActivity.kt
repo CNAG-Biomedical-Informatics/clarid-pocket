@@ -34,6 +34,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.selection.SelectionContainer
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButtonDefaults
 import androidx.compose.material3.FilledTonalIconButton
 import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.rememberModalBottomSheetState
@@ -48,6 +49,8 @@ import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
+import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -157,16 +160,21 @@ private fun PocketScreen(model: PocketViewModel = viewModel()) {
     ) {
         item {
             Column(verticalArrangement = Arrangement.spacedBy(16.dp)) {
-                Row(verticalAlignment = Alignment.CenterVertically,
-                    horizontalArrangement = Arrangement.spacedBy(12.dp)) {
-                    Image(painterResource(R.drawable.ic_clarid), contentDescription = null,
-                        modifier = Modifier.size(40.dp).clip(RoundedCornerShape(8.dp)))
-                    Text("ClarID Pocket", style = MaterialTheme.typography.titleMedium,
-                        modifier = Modifier.weight(1f))
-                    FilledTonalIconButton(onClick = { settingsOpen = true },
-                        modifier = Modifier.size(56.dp), shape = RoundedCornerShape(16.dp)) {
-                        Icon(painterResource(R.drawable.ic_settings), contentDescription = "Decode settings",
-                            modifier = Modifier.size(32.dp))
+                Surface(color = HeaderNavy, contentColor = Color.White,
+                    shape = RoundedCornerShape(20.dp), modifier = Modifier.fillMaxWidth()) {
+                    Row(Modifier.padding(12.dp), verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.spacedBy(12.dp)) {
+                        Image(painterResource(R.drawable.ic_clarid), contentDescription = null,
+                            modifier = Modifier.size(40.dp).clip(RoundedCornerShape(8.dp)))
+                        Text("ClarID Pocket", style = MaterialTheme.typography.titleMedium,
+                            modifier = Modifier.weight(1f))
+                        FilledTonalIconButton(onClick = { settingsOpen = true },
+                            colors = IconButtonDefaults.filledTonalIconButtonColors(
+                                containerColor = SubjectBlue, contentColor = Color.White),
+                            modifier = Modifier.size(56.dp), shape = RoundedCornerShape(16.dp)) {
+                            Icon(painterResource(R.drawable.ic_settings), contentDescription = "Decode settings",
+                                modifier = Modifier.size(32.dp))
+                        }
                     }
                 }
                 Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
@@ -237,6 +245,14 @@ private fun ConfigurationCard(state: PocketState, onChange: (DecodeSettings) -> 
                 StatusLabel("ClarID " + state.specificationVersion.ifEmpty { "…" })
             }
             HorizontalDivider()
+            Text("Identifier entity", style = MaterialTheme.typography.labelLarge)
+            FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                for ((entity, label) in listOf(IdentifierEntity.AUTO to "Auto",
+                    IdentifierEntity.BIOSAMPLE to "Biosample", IdentifierEntity.SUBJECT to "Subject")) {
+                    FilterChip(selected = settings.entity == entity, enabled = enabled,
+                        onClick = { onChange(settings.copy(entity = entity)) }, label = { Text(label) })
+                }
+            }
             Text("Identifier format", style = MaterialTheme.typography.labelLarge)
             FlowRow(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
                 for ((format, label) in listOf(IdentifierFormat.AUTO to "Auto",
@@ -249,23 +265,19 @@ private fun ConfigurationCard(state: PocketState, onChange: (DecodeSettings) -> 
                 Text(if (advanced) "Hide advanced settings" else "Advanced settings")
             }
             if (advanced) {
-                Text("Identifier entity", style = MaterialTheme.typography.labelLarge)
-                FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                    for ((entity, label) in listOf(IdentifierEntity.AUTO to "Auto",
-                        IdentifierEntity.BIOSAMPLE to "Biosample", IdentifierEntity.SUBJECT to "Subject")) {
-                        FilterChip(selected = settings.entity == entity, enabled = enabled,
-                            onClick = { onChange(settings.copy(entity = entity)) }, label = { Text(label) })
-                    }
-                }
                 WidthSetting("Human subject width · Decimal digits", settings.humanSubjectWidth, 18, enabled) {
                     onChange(settings.copy(humanSubjectWidth = it))
                 }
                 WidthSetting("Stub subject width · Base62 characters", settings.stubSubjectWidth, 10, enabled) {
                     onChange(settings.copy(stubSubjectWidth = it))
                 }
-                Text("Use the widths used to create the identifier. A different width may produce " +
-                    "a plausible but incorrect result. Auto does not guess widths.",
-                    style = MaterialTheme.typography.bodySmall)
+                Surface(color = MaterialTheme.colorScheme.tertiaryContainer,
+                    contentColor = MaterialTheme.colorScheme.onTertiaryContainer,
+                    shape = RoundedCornerShape(12.dp)) {
+                    Text("Use the widths used to create the identifier. A different width may produce " +
+                        "a plausible but incorrect result. Auto does not guess widths.",
+                        modifier = Modifier.padding(12.dp), style = MaterialTheme.typography.bodyMedium)
+                }
             }
             HorizontalDivider()
             Row(verticalAlignment = Alignment.CenterVertically,
@@ -274,6 +286,8 @@ private fun ConfigurationCard(state: PocketState, onChange: (DecodeSettings) -> 
                     tint = MaterialTheme.colorScheme.onSurfaceVariant, modifier = Modifier.size(20.dp))
                 Text("About", style = MaterialTheme.typography.titleSmall)
             }
+            Text("App version: " + BuildConfig.VERSION_NAME,
+                style = MaterialTheme.typography.bodyMedium)
             Text("Bundled codebook · " + state.revision.ifEmpty { "Loading…" },
                 style = MaterialTheme.typography.bodySmall)
         }
@@ -294,71 +308,81 @@ private fun WidthSetting(label: String, width: Int, maximum: Int, enabled: Boole
 
 @Composable
 private fun DecodedResult(result: IdentifierRecord, settings: DecodeSettings, identifier: String, autoEntity: Boolean) {
-    SelectionContainer {
-        Column(verticalArrangement = Arrangement.spacedBy(16.dp)) {
-            Surface(color = MaterialTheme.colorScheme.primaryContainer,
-                contentColor = MaterialTheme.colorScheme.onPrimaryContainer,
-                shape = RoundedCornerShape(12.dp), modifier = Modifier.fillMaxWidth()
-                    .semantics { liveRegion = LiveRegionMode.Polite }) {
-                Row(Modifier.padding(16.dp), verticalAlignment = Alignment.CenterVertically,
-                    horizontalArrangement = Arrangement.spacedBy(12.dp)) {
-                    Icon(painterResource(R.drawable.ic_success), contentDescription = null,
-                        modifier = Modifier.size(32.dp))
-                    Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(4.dp)) {
-                        Text((if (autoEntity) "Detected: " else "Decoded: ") + entityLabel(result.entity),
-                            style = MaterialTheme.typography.titleLarge)
-                        Text(configurationCaption(settings), style = MaterialTheme.typography.bodySmall)
-                    }
-                }
-            }
-            Surface(color = MaterialTheme.colorScheme.primaryContainer,
-                shape = RoundedCornerShape(12.dp), modifier = Modifier.fillMaxWidth()) {
-                Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
-                    Text("Scanned identifier", style = MaterialTheme.typography.labelMedium)
-                    Text(identifier, fontFamily = FontFamily.Monospace, style = MaterialTheme.typography.bodyLarge)
-                }
-            }
-            Card(modifier = Modifier.fillMaxWidth(),
-                colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
-                border = BorderStroke(1.dp, MaterialTheme.colorScheme.outlineVariant)) {
-                Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(14.dp)) {
-                    when (result) {
-                        is Biosample -> {
-                            TermField("Project", result.project)
-                            TermField("Species", result.species)
-                            ValueField("Subject ID", result.subjectId.toString())
-                            TermField("Tissue", result.tissue)
-                            TermField("Sample type", result.sampleType)
-                            TermField("Assay", result.assay)
-                            HorizontalDivider()
-                            TermField("Timepoint", result.timepoint)
-                            ValueField("Duration", result.duration)
-                            result.batch?.let { ValueField("Batch", it.toString()) }
-                            result.replicate?.let { ValueField("Replicate", it.toString()) }
+    val colors = MaterialTheme.colorScheme
+    val subject = result is Subject
+    val accent = if (subject) colors.secondary else colors.primary
+    val container = if (subject) SubjectBlue else BiosampleTeal
+    val onContainer = Color.White
+    CompositionLocalProvider(LocalFieldAccent provides accent) {
+        SelectionContainer {
+            Column(verticalArrangement = Arrangement.spacedBy(16.dp)) {
+                Surface(color = container,
+                    contentColor = onContainer,
+                    shape = RoundedCornerShape(12.dp), modifier = Modifier.fillMaxWidth()
+                        .semantics { liveRegion = LiveRegionMode.Polite }) {
+                    Row(Modifier.padding(16.dp), verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.spacedBy(12.dp)) {
+                        Surface(color = successContainer(), contentColor = successContent(),
+                            shape = RoundedCornerShape(24.dp)) {
+                            Icon(painterResource(R.drawable.ic_success), contentDescription = "Decoded successfully",
+                                modifier = Modifier.padding(8.dp).size(32.dp))
                         }
-                        is Subject -> {
-                            ValueField("Study", result.studyLabel?.let { it + " · " + result.study } ?: result.study)
-                            ValueField("Subject ID", result.subjectId.toString())
-                            TermField("Type", result.type)
-                            TermField("Sex", result.sex)
-                            TermField("Age group", result.ageGroup)
+                        Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(4.dp)) {
+                            Text((if (autoEntity) "Detected: " else "Decoded: ") + entityLabel(result.entity),
+                                style = MaterialTheme.typography.titleLarge)
+                            Text(configurationCaption(settings), style = MaterialTheme.typography.bodySmall)
                         }
                     }
                 }
-            }
-            Row(verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.spacedBy(10.dp)) {
-                FieldIcon(R.drawable.ic_health)
-                Text("Diseases · ICD-10", style = MaterialTheme.typography.titleLarge)
-            }
-            result.conditions.forEach { disease ->
+                Surface(color = colors.surfaceVariant, contentColor = colors.onSurface,
+                    shape = RoundedCornerShape(12.dp), modifier = Modifier.fillMaxWidth()) {
+                    Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                        Text("Scanned identifier", style = MaterialTheme.typography.labelMedium)
+                        Text(identifier, fontFamily = FontFamily.Monospace, style = MaterialTheme.typography.bodyLarge)
+                    }
+                }
                 Card(modifier = Modifier.fillMaxWidth(),
                     colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
                     border = BorderStroke(1.dp, MaterialTheme.colorScheme.outlineVariant)) {
-                    Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(6.dp)) {
-                        Text(disease.code, style = MaterialTheme.typography.titleMedium,
-                            fontFamily = FontFamily.Monospace)
-                        Text(disease.label ?: "Label unavailable", style = MaterialTheme.typography.bodyLarge)
+                    Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(14.dp)) {
+                        when (result) {
+                            is Biosample -> {
+                                TermField("Project", result.project)
+                                TermField("Species", result.species)
+                                ValueField("Subject ID", result.subjectId.toString())
+                                TermField("Tissue", result.tissue)
+                                TermField("Sample type", result.sampleType)
+                                TermField("Assay", result.assay)
+                                HorizontalDivider()
+                                TermField("Timepoint", result.timepoint)
+                                ValueField("Duration", result.duration)
+                                result.batch?.let { ValueField("Batch", it.toString()) }
+                                result.replicate?.let { ValueField("Replicate", it.toString()) }
+                            }
+                            is Subject -> {
+                                ValueField("Study", result.studyLabel?.let { it + " · " + result.study } ?: result.study)
+                                ValueField("Subject ID", result.subjectId.toString())
+                                TermField("Type", result.type)
+                                TermField("Sex", result.sex)
+                                TermField("Age group", result.ageGroup)
+                            }
+                        }
+                    }
+                }
+                Row(verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.spacedBy(10.dp)) {
+                    FieldIcon(R.drawable.ic_health)
+                    Text("Diseases · ICD-10", style = MaterialTheme.typography.titleLarge)
+                }
+                result.conditions.forEach { disease ->
+                    Card(modifier = Modifier.fillMaxWidth(),
+                        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
+                        border = BorderStroke(1.dp, MaterialTheme.colorScheme.outlineVariant)) {
+                        Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(6.dp)) {
+                            Text(disease.code, style = MaterialTheme.typography.titleMedium,
+                                fontFamily = FontFamily.Monospace)
+                            Text(disease.label ?: "Label unavailable", style = MaterialTheme.typography.bodyLarge)
+                        }
                     }
                 }
             }
@@ -421,10 +445,12 @@ private fun ValueField(name: String, value: String) {
     }
 }
 
+private val LocalFieldAccent = staticCompositionLocalOf { Color.Unspecified }
+
 @Composable
 private fun FieldIcon(resource: Int) {
     Icon(painterResource(resource), contentDescription = null,
-        tint = MaterialTheme.colorScheme.primary, modifier = Modifier.size(20.dp))
+        tint = LocalFieldAccent.current, modifier = Modifier.size(20.dp))
 }
 
 private fun fieldIcon(name: String): Int = when (name) {

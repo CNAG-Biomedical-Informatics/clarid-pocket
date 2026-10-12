@@ -15,12 +15,23 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
+// Solid brand surfaces retain white-text contrast in both themes.
+internal val HeaderNavy = Color(0xFF172E4A)
+internal val SubjectBlue = Color(0xFF245B9A)
+internal val BiosampleTeal = Color(0xFF126B70)
+
 private val LightColors = lightColorScheme(
     primary = Color(0xFF165D62),
     onPrimary = Color.White,
     primaryContainer = Color(0xFFE0F0ED),
     onPrimaryContainer = Color(0xFF123D3F),
-    secondary = Color(0xFF475C70),
+    secondary = Color(0xFF345F91),
+    onSecondary = Color.White,
+    secondaryContainer = Color(0xFFE5EEFA),
+    onSecondaryContainer = Color(0xFF183B65),
+    tertiary = Color(0xFF825600),
+    tertiaryContainer = Color(0xFFFFEBC2),
+    onTertiaryContainer = Color(0xFF513500),
     background = Color(0xFFF5F7F9),
     surface = Color(0xFFFDFDFE),
     surfaceVariant = Color(0xFFE9EEF2),
@@ -35,6 +46,13 @@ private val DarkColors = darkColorScheme(
     onPrimary = Color(0xFF073638),
     primaryContainer = Color(0xFF173E40),
     onPrimaryContainer = Color(0xFFBCEBE4),
+    secondary = Color(0xFFA8C9F5),
+    onSecondary = Color(0xFF103258),
+    secondaryContainer = Color(0xFF203D60),
+    onSecondaryContainer = Color(0xFFD5E6FF),
+    tertiary = Color(0xFFF2C46C),
+    tertiaryContainer = Color(0xFF49370F),
+    onTertiaryContainer = Color(0xFFFFE3A5),
     background = Color(0xFF101820),
     surface = Color(0xFF16212B),
     surfaceVariant = Color(0xFF25333E),
@@ -80,3 +98,10 @@ fun PocketTheme(content: @Composable () -> Unit) {
         content = content,
     )
 }
+
+// Success uses green independently of the subject/biosample colour.
+@Composable
+fun successContainer(): Color = if (isSystemInDarkTheme()) Color(0xFF193E2A) else Color(0xFFDCEFE1)
+
+@Composable
+fun successContent(): Color = if (isSystemInDarkTheme()) Color(0xFFA4DFB4) else Color(0xFF24613A)

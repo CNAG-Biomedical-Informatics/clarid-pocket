@@ -11,10 +11,13 @@ android {
         applicationId = "org.cnag.clarid.pocket"
         minSdk = 26
         targetSdk = 36
-        versionCode = 7
-        versionName = "0.1.6-dev"
+        versionCode = 9
+        versionName = "0.1.8-dev"
     }
-    buildFeatures { compose = true }
+    buildFeatures {
+        compose = true
+        buildConfig = true
+    }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
