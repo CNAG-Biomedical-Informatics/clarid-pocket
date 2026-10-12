@@ -110,6 +110,33 @@ lint, and core tests do not replace these camera and visual checks.
   logging. Only decoding settings are persisted; scans are held in memory.
 - The app stores no scan history. Backup and device transfer are disabled.
 
+## On-device storage
+
+The application ID is `org.cnag.clarid.pocket`. Android stores its data in the
+app's private internal directory. For the primary Android user, the settings
+file is normally:
+
+```text
+/data/user/0/org.cnag.clarid.pocket/shared_prefs/decode-settings.xml
+```
+
+The Android user/profile number can differ. The app uses Android's
+`getSharedPreferences("decode-settings", MODE_PRIVATE)` API rather than a
+hard-coded filesystem path. These are private preferences, not an encrypted
+vault or a file exposed in Downloads.
+
+Only four preferences are persisted: `format-v2`, `entity`, `human-width`, and
+`stub-width`. QR text, decoded fields, disease results, and errors live in the
+ViewModel's memory; there is no scan database, scan history, or camera-image
+storage. Starting another scan or changing settings clears the current result;
+process termination also loses it.
+
+The codebook, schema, ICD-10 dictionaries, and barcode model are packaged inside
+the APK. They are not downloaded at runtime. The app has no Internet permission.
+Cloud backup and device transfer are excluded by the manifest and data-extraction
+rules. Uninstalling the app or clearing its storage removes the saved settings.
+Normal updates signed with the same key preserve them.
+
 ## Reference and verification
 
 Use the [ClarID-Tools documentation](https://cnag-biomedical-informatics.github.io/clarid-tools/)
