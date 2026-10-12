@@ -178,7 +178,7 @@ Release packaging fails if the signing setup is missing.
 
 1. Update `versionName` and increment `versionCode` in `app/build.gradle.kts`.
 2. Commit the release changes and create an annotated tag matching `versionName`
-   (for example `git tag -a v0.1.8 -m "ClarID-Pocket 0.1.8"`).
+   (for example `git tag -a v0.1.9 -m "ClarID-Pocket 0.1.9"`).
 3. Build the clean tagged commit with the private signing setup:
 
    ```sh
