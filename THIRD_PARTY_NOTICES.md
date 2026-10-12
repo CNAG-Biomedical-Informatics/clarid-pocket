@@ -1,6 +1,6 @@
 # Reference data and acknowledgements
 
-ClarID Pocket implements a subset of the biosample format documented and
+ClarID-Pocket implements a subset of the biosample format documented and
 implemented by [ClarID-Tools](https://github.com/CNAG-Biomedical-Informatics/clarid-tools),
 developed by Manuel Rueda. Its decoding behavior and fixtures are based on release
 0.04, commit `3789effd7481cef5928a251095f2b7f792b9fa3f`.

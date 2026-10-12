@@ -7,7 +7,7 @@
     <uses-feature android:name="android.hardware.camera.any" android:required="true" />
     <application android:usesCleartextTraffic="false" android:allowBackup="false" android:fullBackupContent="false"
         android:dataExtractionRules="@xml/data_extraction_rules"
-        android:label="ClarID Pocket"
+        android:label="ClarID-Pocket"
         android:icon="@drawable/ic_clarid" android:supportsRtl="true"
         android:theme="@style/Theme.ClarIDPocket">
         <activity android:name=".MainActivity" android:exported="true">

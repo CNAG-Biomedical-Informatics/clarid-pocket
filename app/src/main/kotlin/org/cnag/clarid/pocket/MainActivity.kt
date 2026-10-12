@@ -166,7 +166,7 @@ private fun PocketScreen(model: PocketViewModel = viewModel()) {
                         horizontalArrangement = Arrangement.spacedBy(12.dp)) {
                         Image(painterResource(R.drawable.ic_clarid), contentDescription = null,
                             modifier = Modifier.size(40.dp).clip(RoundedCornerShape(8.dp)))
-                        Text("ClarID Pocket", style = MaterialTheme.typography.titleMedium,
+                        Text("ClarID-Pocket", style = MaterialTheme.typography.titleMedium,
                             modifier = Modifier.weight(1f))
                         FilledTonalIconButton(onClick = { settingsOpen = true },
                             colors = IconButtonDefaults.filledTonalIconButtonColors(

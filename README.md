@@ -1,16 +1,16 @@
-# ClarID Pocket
+# ClarID-Pocket
 
 Scan ClarID QR labels to view biosample or subject details, including disease
 codes and labels. Works offline on **Android 8 or newer**.
 
 ## Install
 
-1. Download `clarid-pocket-0.1.8.apk` from
+1. Download `clarid-pocket-0.1.9.apk` from
    [GitHub Releases](https://github.com/CNAG-Biomedical-Informatics/clarid-pocket/releases)
    to your phone once the release is published.
 2. Open the APK on your phone. If prompted, allow installation from the browser
    or file manager you used, then tap **Install**.
-3. Open **ClarID Pocket** and tap **Scan QR**. Allow camera access when asked.
+3. Open **ClarID-Pocket** and tap **Scan QR**. Allow camera access when asked.
 
 You do not need Android Studio or a USB connection to use the app.
 Downloads are available when a release is published.

@@ -1,4 +1,4 @@
-# Developing ClarID Pocket
+# Developing ClarID-Pocket
 
 Build instructions, device checks, and implementation details.
 For installation and everyday use, see [README.md](README.md).
@@ -55,7 +55,7 @@ You can also transfer the APK to the phone and open it manually. Android may
 ask you to permit installation from the app used to open the file.
 
 For the first offline test, install without launching, enable airplane mode,
-then launch ClarID Pocket. Leave **Auto** selected (default stub width 3, human
+then launch ClarID-Pocket. Leave **Auto** selected (default stub width 3, human
 width 5). Tap **Scan QR**, allow Camera, and scan this example from another screen.
 A single visible QR scans immediately, without holding still or fitting it
 inside the guide. If several are visible, aim the centre crosshair at the one
@@ -178,7 +178,7 @@ Release packaging fails if the signing setup is missing.
 
 1. Update `versionName` and increment `versionCode` in `app/build.gradle.kts`.
 2. Commit the release changes and create an annotated tag matching `versionName`
-   (for example `git tag -a v0.1.8 -m "ClarID Pocket 0.1.8"`).
+   (for example `git tag -a v0.1.8 -m "ClarID-Pocket 0.1.8"`).
 3. Build the clean tagged commit with the private signing setup:
 
    ```sh
