@@ -1,7 +1,24 @@
+import java.util.Properties
+
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
     id("org.jetbrains.kotlin.plugin.compose")
+}
+
+val releaseSigningFile = providers.environmentVariable("CLARID_SIGNING_PROPERTIES")
+    .map { file(it) }
+    .getOrElse(file("${System.getProperty("user.home")}/.config/clarid-pocket/signing.properties"))
+val releaseSigning = Properties().apply {
+    if (releaseSigningFile.isFile) releaseSigningFile.inputStream().use { load(it) }
+}
+val requireReleaseSigning = tasks.register("requireReleaseSigning") {
+    doLast {
+        check(listOf("storeFile", "storePassword", "keyAlias", "keyPassword").all {
+            !releaseSigning.getProperty(it).isNullOrBlank()
+        }) { "Release signing is missing. See DEVELOPMENT.md for CLARID_SIGNING_PROPERTIES." }
+        check(file(releaseSigning.getProperty("storeFile")).isFile) { "Release keystore is missing." }
+    }
 }
 
 android {
@@ -11,8 +28,19 @@ android {
         applicationId = "org.cnag.clarid.pocket"
         minSdk = 26
         targetSdk = 36
-        versionCode = 9
-        versionName = "0.1.8-dev"
+        versionCode = 10
+        versionName = "0.1.8"
+    }
+    signingConfigs {
+        create("release") {
+            releaseSigning.getProperty("storeFile")?.let { storeFile = file(it) }
+            storePassword = releaseSigning.getProperty("storePassword")
+            keyAlias = releaseSigning.getProperty("keyAlias")
+            keyPassword = releaseSigning.getProperty("keyPassword")
+        }
+    }
+    buildTypes {
+        getByName("release") { signingConfig = signingConfigs.getByName("release") }
     }
     buildFeatures {
         compose = true
@@ -42,4 +70,9 @@ dependencies {
     // Bundled model: scanning does not need a first-use download.
     implementation("com.google.mlkit:barcode-scanning:17.3.0")
     testImplementation("junit:junit:4.13.2")
+}
+
+// Never produce an unsigned release when the local signing setup is absent.
+tasks.matching { it.name == "validateSigningRelease" || it.name == "packageRelease" }.configureEach {
+    dependsOn(requireReleaseSigning)
 }

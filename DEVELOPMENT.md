@@ -137,3 +137,34 @@ Its downloaded archive checksum is recorded in the SDK's
 `CLARID_INSTALL_SOURCE.json`.
 
 See [third-party notices](THIRD_PARTY_NOTICES.md) for bundled data provenance.
+
+## Signed releases
+
+Release builds use a dedicated private key. Keep the keystore and its passwords
+outside Git and back up both in secure storage; future Android updates must use
+the same key. Debug builds continue using Android's debug key.
+
+Gradle reads `~/.config/clarid-pocket/signing.properties` by default, or the path
+in `CLARID_SIGNING_PROPERTIES`. That private file contains `storeFile` (absolute
+keystore path), `storePassword`, `keyAlias`, and `keyPassword`. Never commit it.
+Release packaging fails if the signing setup is missing.
+
+1. Update `versionName` and increment `versionCode` in `app/build.gradle.kts`.
+2. Commit the release changes and create an annotated tag matching `versionName`
+   (for example `git tag -a v0.1.8 -m "ClarID Pocket 0.1.8"`).
+3. Build the clean tagged commit with the private signing setup:
+
+   ```sh
+   bash tools/android-gradle.sh :core:test :app:testReleaseUnitTest :app:assembleRelease :app:lintRelease
+   ```
+
+4. Verify the APK with Android SDK `apksigner verify --verbose --print-certs`
+   and `zipalign -c -P 16 4`. Confirm its version and release certificate.
+5. Copy `app/build/outputs/apk/release/app-release.apk` to a versioned APK in
+   `dist/` and generate a matching SHA-256 checksum.
+6. Push the commit and tag. Create or update a **draft** GitHub Release for that
+   tag with the APK, checksum, and installation notes; review before publishing.
+
+The first release-key APK requires uninstalling an existing debug-key build
+before installation. This clears its saved settings. Subsequent release-key
+updates install over the existing app.

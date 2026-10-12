@@ -9,4 +9,6 @@ local.properties
 *.keystore
 dist/
 __pycache__/
-
+*.p12
+*.pfx
+signing.properties

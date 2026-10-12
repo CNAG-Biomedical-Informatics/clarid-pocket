@@ -5,14 +5,15 @@ codes and labels. Works offline on **Android 8 or newer**.
 
 ## Install
 
-1. Copy the ClarID Pocket APK to your phone. The current development build is
-   `clarid-pocket-0.1.8-debug.apk` (available locally in `dist/`).
+1. Download `clarid-pocket-0.1.8.apk` from
+   [GitHub Releases](https://github.com/CNAG-Biomedical-Informatics/clarid-pocket/releases)
+   to your phone once the release is published.
 2. Open the APK on your phone. If prompted, allow installation from the browser
    or file manager you used, then tap **Install**.
 3. Open **ClarID Pocket** and tap **Scan QR**. Allow camera access when asked.
 
 You do not need Android Studio or a USB connection to use the app.
-There is no published download release yet; the APK must be supplied separately.
+The first signed release is being prepared as a draft.
 To update, open a newer APK signed with the same key and install it over the
 existing app.
 
