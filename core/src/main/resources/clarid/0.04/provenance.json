@@ -1,0 +1,43 @@
+{
+  "repository": "https://github.com/CNAG-Biomedical-Informatics/clarid-tools",
+  "commit": "3789effd7481cef5928a251095f2b7f792b9fa3f",
+  "release": "0.04",
+  "files": [
+    {
+      "source": "share/versions/0.04/clarid-codebook.yaml",
+      "bundled": "clarid-codebook.yaml",
+      "sha256": "95ad54755f4de333f8eca304a86f371f86ff1d57e0bc7a41483e7f4d952baa8a",
+      "bytes": 17513
+    },
+    {
+      "source": "share/versions/0.04/clarid-codebook-schema.json",
+      "bundled": "clarid-codebook-schema.json",
+      "sha256": "45a475502cc870c61ae6836a4a4b434b4dd2663b9926c79eeb46408fb0bdb727",
+      "bytes": 5424
+    },
+    {
+      "source": "share/icd10.json",
+      "bundled": "icd10.json",
+      "sha256": "f95c69e5413ad89e53ca1a55cce45ab204c6ed7000a5bbd9c362069e15589869",
+      "bytes": 3124242
+    },
+    {
+      "source": "share/icd10_order.json",
+      "bundled": "icd10_order.json",
+      "sha256": "5dd9a7d3c00b25fe43db0848ad0a19777e0579f2d367917df59724a990f394db",
+      "bytes": 839292
+    },
+    {
+      "source": "share/README_ICD10.md",
+      "bundled": "README_ICD10.md",
+      "sha256": "99c0114a34eb028caa25bf80df394e0069c50f7cefc13114ac90c8ceef57a984",
+      "bytes": 761
+    },
+    {
+      "source": "LICENSE",
+      "bundled": "LICENSE-ClarID-Tools.txt",
+      "sha256": "270d438377e621c0dae018b6aaca75533a19c9a53f9ba845e54e407fdba8f126",
+      "bytes": 9073
+    }
+  ]
+}

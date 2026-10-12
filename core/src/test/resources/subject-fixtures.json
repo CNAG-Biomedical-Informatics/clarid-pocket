@@ -1,0 +1,725 @@
+{
+  "commit": "3789effd7481cef5928a251095f2b7f792b9fa3f",
+  "fixtures": [
+    {
+      "name": "human_basic",
+      "format": "human",
+      "identifier": "TCGA_AML-00001-Case-I25.110-Male-A40_49",
+      "human_width": 5,
+      "stub_width": 3,
+      "expected": {
+        "study": "TCGA_AML",
+        "subject_id": "1",
+        "type": "Case",
+        "condition": "I25.110",
+        "sex": "Male",
+        "age_group": "Age40to49",
+        "condition_name": "Atherosclerotic heart disease of native coronary artery with unstable angina pectoris"
+      }
+    },
+    {
+      "name": "human_control",
+      "format": "human",
+      "identifier": "TCGA_AML-00001-Control-I25.110-Female-A0_9",
+      "human_width": 5,
+      "stub_width": 3,
+      "expected": {
+        "study": "TCGA_AML",
+        "subject_id": "1",
+        "type": "Control",
+        "condition": "I25.110",
+        "sex": "Female",
+        "age_group": "Age0to9",
+        "condition_name": "Atherosclerotic heart disease of native coronary artery with unstable angina pectoris"
+      }
+    },
+    {
+      "name": "human_multiple_conditions",
+      "format": "human",
+      "identifier": "TCGA_AML-00001-Case-I25.110+C22.0-Male-A40_49",
+      "human_width": 5,
+      "stub_width": 3,
+      "expected": {
+        "study": "TCGA_AML",
+        "subject_id": "1",
+        "type": "Case",
+        "condition": "I25.110+C22.0",
+        "sex": "Male",
+        "age_group": "Age40to49",
+        "condition_name": "Atherosclerotic heart disease of native coronary artery with unstable angina pectoris;Liver cell carcinoma"
+      }
+    },
+    {
+      "name": "human_free_study",
+      "format": "human",
+      "identifier": "CUSTOM_2026-00001-Case-I25.110-Male-A40_49",
+      "human_width": 5,
+      "stub_width": 3,
+      "expected": {
+        "study": "CUSTOM_2026",
+        "subject_id": "1",
+        "type": "Case",
+        "condition": "I25.110",
+        "sex": "Male",
+        "age_group": "Age40to49",
+        "condition_name": "Atherosclerotic heart disease of native coronary artery with unstable angina pectoris"
+      }
+    },
+    {
+      "name": "human_known_study",
+      "format": "human",
+      "identifier": "TARGET_AML-00001-Case-I25.110-Male-A40_49",
+      "human_width": 5,
+      "stub_width": 3,
+      "expected": {
+        "study": "TARGET_AML",
+        "subject_id": "1",
+        "type": "Case",
+        "condition": "I25.110",
+        "sex": "Male",
+        "age_group": "Age40to49",
+        "condition_name": "Atherosclerotic heart disease of native coronary artery with unstable angina pectoris"
+      }
+    },
+    {
+      "name": "human_zero",
+      "format": "human",
+      "identifier": "TCGA_AML-00000-Case-I25.110-Male-A40_49",
+      "human_width": 5,
+      "stub_width": 3,
+      "expected": {
+        "study": "TCGA_AML",
+        "subject_id": "0",
+        "type": "Case",
+        "condition": "I25.110",
+        "sex": "Male",
+        "age_group": "Age40to49",
+        "condition_name": "Atherosclerotic heart disease of native coronary artery with unstable angina pectoris"
+      }
+    },
+    {
+      "name": "human_base62_lower",
+      "format": "human",
+      "identifier": "TCGA_AML-00061-Case-I25.110-Male-A40_49",
+      "human_width": 5,
+      "stub_width": 3,
+      "expected": {
+        "study": "TCGA_AML",
+        "subject_id": "61",
+        "type": "Case",
+        "condition": "I25.110",
+        "sex": "Male",
+        "age_group": "Age40to49",
+        "condition_name": "Atherosclerotic heart disease of native coronary artery with unstable angina pectoris"
+      }
+    },
+    {
+      "name": "human_base62_carry",
+      "format": "human",
+      "identifier": "TCGA_AML-00062-Case-I25.110-Male-A40_49",
+      "human_width": 5,
+      "stub_width": 3,
+      "expected": {
+        "study": "TCGA_AML",
+        "subject_id": "62",
+        "type": "Case",
+        "condition": "I25.110",
+        "sex": "Male",
+        "age_group": "Age40to49",
+        "condition_name": "Atherosclerotic heart disease of native coronary artery with unstable angina pectoris"
+      }
+    },
+    {
+      "name": "human_not_reported",
+      "format": "human",
+      "identifier": "TCGA_AML-00001-Case-I25.110-NotR-A40_49",
+      "human_width": 5,
+      "stub_width": 3,
+      "expected": {
+        "study": "TCGA_AML",
+        "subject_id": "1",
+        "type": "Case",
+        "condition": "I25.110",
+        "sex": "NotR",
+        "age_group": "Age40to49",
+        "condition_name": "Atherosclerotic heart disease of native coronary artery with unstable angina pectoris"
+      }
+    },
+    {
+      "name": "human_unspecified",
+      "format": "human",
+      "identifier": "TCGA_AML-00001-Case-I25.110-Uns-A40_49",
+      "human_width": 5,
+      "stub_width": 3,
+      "expected": {
+        "study": "TCGA_AML",
+        "subject_id": "1",
+        "type": "Case",
+        "condition": "I25.110",
+        "sex": "Uns",
+        "age_group": "Age40to49",
+        "condition_name": "Atherosclerotic heart disease of native coronary artery with unstable angina pectoris"
+      }
+    },
+    {
+      "name": "human_unknown",
+      "format": "human",
+      "identifier": "TCGA_AML-00001-UNK-I25.110-UNK-UNK",
+      "human_width": 5,
+      "stub_width": 3,
+      "expected": {
+        "study": "TCGA_AML",
+        "subject_id": "1",
+        "type": "UNK",
+        "condition": "I25.110",
+        "sex": "UNK",
+        "age_group": "Unknown",
+        "condition_name": "Atherosclerotic heart disease of native coronary artery with unstable angina pectoris"
+      }
+    },
+    {
+      "name": "human_unavailable",
+      "format": "human",
+      "identifier": "TCGA_AML-00001-NAV-I25.110-NAV-NAV",
+      "human_width": 5,
+      "stub_width": 3,
+      "expected": {
+        "study": "TCGA_AML",
+        "subject_id": "1",
+        "type": "NAV",
+        "condition": "I25.110",
+        "sex": "NAV",
+        "age_group": "Not Available",
+        "condition_name": "Atherosclerotic heart disease of native coronary artery with unstable angina pectoris"
+      }
+    },
+    {
+      "name": "human_age_10",
+      "format": "human",
+      "identifier": "TCGA_AML-00001-Case-I25.110-Male-A10_19",
+      "human_width": 5,
+      "stub_width": 3,
+      "expected": {
+        "study": "TCGA_AML",
+        "subject_id": "1",
+        "type": "Case",
+        "condition": "I25.110",
+        "sex": "Male",
+        "age_group": "Age10to19",
+        "condition_name": "Atherosclerotic heart disease of native coronary artery with unstable angina pectoris"
+      }
+    },
+    {
+      "name": "human_age_20",
+      "format": "human",
+      "identifier": "TCGA_AML-00001-Case-I25.110-Male-A20_29",
+      "human_width": 5,
+      "stub_width": 3,
+      "expected": {
+        "study": "TCGA_AML",
+        "subject_id": "1",
+        "type": "Case",
+        "condition": "I25.110",
+        "sex": "Male",
+        "age_group": "Age20to29",
+        "condition_name": "Atherosclerotic heart disease of native coronary artery with unstable angina pectoris"
+      }
+    },
+    {
+      "name": "human_age_30",
+      "format": "human",
+      "identifier": "TCGA_AML-00001-Case-I25.110-Male-A30_39",
+      "human_width": 5,
+      "stub_width": 3,
+      "expected": {
+        "study": "TCGA_AML",
+        "subject_id": "1",
+        "type": "Case",
+        "condition": "I25.110",
+        "sex": "Male",
+        "age_group": "Age30to39",
+        "condition_name": "Atherosclerotic heart disease of native coronary artery with unstable angina pectoris"
+      }
+    },
+    {
+      "name": "human_age_40",
+      "format": "human",
+      "identifier": "TCGA_AML-00001-Case-I25.110-Male-A40_49",
+      "human_width": 5,
+      "stub_width": 3,
+      "expected": {
+        "study": "TCGA_AML",
+        "subject_id": "1",
+        "type": "Case",
+        "condition": "I25.110",
+        "sex": "Male",
+        "age_group": "Age40to49",
+        "condition_name": "Atherosclerotic heart disease of native coronary artery with unstable angina pectoris"
+      }
+    },
+    {
+      "name": "human_age_50",
+      "format": "human",
+      "identifier": "TCGA_AML-00001-Case-I25.110-Male-A50_59",
+      "human_width": 5,
+      "stub_width": 3,
+      "expected": {
+        "study": "TCGA_AML",
+        "subject_id": "1",
+        "type": "Case",
+        "condition": "I25.110",
+        "sex": "Male",
+        "age_group": "Age50to59",
+        "condition_name": "Atherosclerotic heart disease of native coronary artery with unstable angina pectoris"
+      }
+    },
+    {
+      "name": "human_age_60",
+      "format": "human",
+      "identifier": "TCGA_AML-00001-Case-I25.110-Male-A60_69",
+      "human_width": 5,
+      "stub_width": 3,
+      "expected": {
+        "study": "TCGA_AML",
+        "subject_id": "1",
+        "type": "Case",
+        "condition": "I25.110",
+        "sex": "Male",
+        "age_group": "Age60to69",
+        "condition_name": "Atherosclerotic heart disease of native coronary artery with unstable angina pectoris"
+      }
+    },
+    {
+      "name": "human_age_70",
+      "format": "human",
+      "identifier": "TCGA_AML-00001-Case-I25.110-Male-A70_79",
+      "human_width": 5,
+      "stub_width": 3,
+      "expected": {
+        "study": "TCGA_AML",
+        "subject_id": "1",
+        "type": "Case",
+        "condition": "I25.110",
+        "sex": "Male",
+        "age_group": "Age70to79",
+        "condition_name": "Atherosclerotic heart disease of native coronary artery with unstable angina pectoris"
+      }
+    },
+    {
+      "name": "human_age_80",
+      "format": "human",
+      "identifier": "TCGA_AML-00001-Case-I25.110-Male-A80_89",
+      "human_width": 5,
+      "stub_width": 3,
+      "expected": {
+        "study": "TCGA_AML",
+        "subject_id": "1",
+        "type": "Case",
+        "condition": "I25.110",
+        "sex": "Male",
+        "age_group": "Age80to89",
+        "condition_name": "Atherosclerotic heart disease of native coronary artery with unstable angina pectoris"
+      }
+    },
+    {
+      "name": "human_age_90",
+      "format": "human",
+      "identifier": "TCGA_AML-00001-Case-I25.110-Male-A90_99",
+      "human_width": 5,
+      "stub_width": 3,
+      "expected": {
+        "study": "TCGA_AML",
+        "subject_id": "1",
+        "type": "Case",
+        "condition": "I25.110",
+        "sex": "Male",
+        "age_group": "Age90to99",
+        "condition_name": "Atherosclerotic heart disease of native coronary artery with unstable angina pectoris"
+      }
+    },
+    {
+      "name": "human_custom_width",
+      "format": "human",
+      "identifier": "TCGA_AML-0500000-Case-I25.110-Male-A40_49",
+      "human_width": 7,
+      "stub_width": 4,
+      "expected": {
+        "study": "TCGA_AML",
+        "subject_id": "500000",
+        "type": "Case",
+        "condition": "I25.110",
+        "sex": "Male",
+        "age_group": "Age40to49",
+        "condition_name": "Atherosclerotic heart disease of native coronary artery with unstable angina pectoris"
+      }
+    },
+    {
+      "name": "stub_basic",
+      "format": "stub",
+      "identifier": "AML001C2to01MA4",
+      "human_width": 5,
+      "stub_width": 3,
+      "expected": {
+        "study": "AML",
+        "subject_id": "1",
+        "type": "Case",
+        "condition": "I25.110",
+        "sex": "Male",
+        "age_group": "Age40to49",
+        "condition_name": "Atherosclerotic heart disease of native coronary artery with unstable angina pectoris"
+      }
+    },
+    {
+      "name": "stub_control",
+      "format": "stub",
+      "identifier": "AML001N2to01FA0",
+      "human_width": 5,
+      "stub_width": 3,
+      "expected": {
+        "study": "AML",
+        "subject_id": "1",
+        "type": "Control",
+        "condition": "I25.110",
+        "sex": "Female",
+        "age_group": "Age0to9",
+        "condition_name": "Atherosclerotic heart disease of native coronary artery with unstable angina pectoris"
+      }
+    },
+    {
+      "name": "stub_multiple_conditions",
+      "format": "stub",
+      "identifier": "AML001C2to0N402MA4",
+      "human_width": 5,
+      "stub_width": 3,
+      "expected": {
+        "study": "AML",
+        "subject_id": "1",
+        "type": "Case",
+        "condition": "I25.110;C22.0",
+        "sex": "Male",
+        "age_group": "Age40to49",
+        "condition_name": "Atherosclerotic heart disease of native coronary artery with unstable angina pectoris;Liver cell carcinoma"
+      }
+    },
+    {
+      "name": "stub_free_study",
+      "format": "stub",
+      "identifier": "CUSTOM_2026001C2to01MA4",
+      "human_width": 5,
+      "stub_width": 3,
+      "expected": {
+        "study": "CUSTOM_2026",
+        "subject_id": "1",
+        "type": "Case",
+        "condition": "I25.110",
+        "sex": "Male",
+        "age_group": "Age40to49",
+        "condition_name": "Atherosclerotic heart disease of native coronary artery with unstable angina pectoris"
+      }
+    },
+    {
+      "name": "stub_known_study",
+      "format": "stub",
+      "identifier": "TAML001C2to01MA4",
+      "human_width": 5,
+      "stub_width": 3,
+      "expected": {
+        "study": "TAML",
+        "subject_id": "1",
+        "type": "Case",
+        "condition": "I25.110",
+        "sex": "Male",
+        "age_group": "Age40to49",
+        "condition_name": "Atherosclerotic heart disease of native coronary artery with unstable angina pectoris"
+      }
+    },
+    {
+      "name": "stub_zero",
+      "format": "stub",
+      "identifier": "AML000C2to01MA4",
+      "human_width": 5,
+      "stub_width": 3,
+      "expected": {
+        "study": "AML",
+        "subject_id": "0",
+        "type": "Case",
+        "condition": "I25.110",
+        "sex": "Male",
+        "age_group": "Age40to49",
+        "condition_name": "Atherosclerotic heart disease of native coronary artery with unstable angina pectoris"
+      }
+    },
+    {
+      "name": "stub_base62_lower",
+      "format": "stub",
+      "identifier": "AML00zC2to01MA4",
+      "human_width": 5,
+      "stub_width": 3,
+      "expected": {
+        "study": "AML",
+        "subject_id": "61",
+        "type": "Case",
+        "condition": "I25.110",
+        "sex": "Male",
+        "age_group": "Age40to49",
+        "condition_name": "Atherosclerotic heart disease of native coronary artery with unstable angina pectoris"
+      }
+    },
+    {
+      "name": "stub_base62_carry",
+      "format": "stub",
+      "identifier": "AML010C2to01MA4",
+      "human_width": 5,
+      "stub_width": 3,
+      "expected": {
+        "study": "AML",
+        "subject_id": "62",
+        "type": "Case",
+        "condition": "I25.110",
+        "sex": "Male",
+        "age_group": "Age40to49",
+        "condition_name": "Atherosclerotic heart disease of native coronary artery with unstable angina pectoris"
+      }
+    },
+    {
+      "name": "stub_not_reported",
+      "format": "stub",
+      "identifier": "AML001C2to01NA4",
+      "human_width": 5,
+      "stub_width": 3,
+      "expected": {
+        "study": "AML",
+        "subject_id": "1",
+        "type": "Case",
+        "condition": "I25.110",
+        "sex": "Not reported",
+        "age_group": "Age40to49",
+        "condition_name": "Atherosclerotic heart disease of native coronary artery with unstable angina pectoris"
+      }
+    },
+    {
+      "name": "stub_unspecified",
+      "format": "stub",
+      "identifier": "AML001C2to01SA4",
+      "human_width": 5,
+      "stub_width": 3,
+      "expected": {
+        "study": "AML",
+        "subject_id": "1",
+        "type": "Case",
+        "condition": "I25.110",
+        "sex": "Unspecified",
+        "age_group": "Age40to49",
+        "condition_name": "Atherosclerotic heart disease of native coronary artery with unstable angina pectoris"
+      }
+    },
+    {
+      "name": "stub_unknown",
+      "format": "stub",
+      "identifier": "AML001U2to01UUN",
+      "human_width": 5,
+      "stub_width": 3,
+      "expected": {
+        "study": "AML",
+        "subject_id": "1",
+        "type": "Unknown",
+        "condition": "I25.110",
+        "sex": "Unknown",
+        "age_group": "Unknown",
+        "condition_name": "Atherosclerotic heart disease of native coronary artery with unstable angina pectoris"
+      }
+    },
+    {
+      "name": "stub_unavailable",
+      "format": "stub",
+      "identifier": "AML001n2to01nNA",
+      "human_width": 5,
+      "stub_width": 3,
+      "expected": {
+        "study": "AML",
+        "subject_id": "1",
+        "type": "Not Available",
+        "condition": "I25.110",
+        "sex": "Not Available",
+        "age_group": "Not Available",
+        "condition_name": "Atherosclerotic heart disease of native coronary artery with unstable angina pectoris"
+      }
+    },
+    {
+      "name": "stub_age_10",
+      "format": "stub",
+      "identifier": "AML001C2to01MA1",
+      "human_width": 5,
+      "stub_width": 3,
+      "expected": {
+        "study": "AML",
+        "subject_id": "1",
+        "type": "Case",
+        "condition": "I25.110",
+        "sex": "Male",
+        "age_group": "Age10to19",
+        "condition_name": "Atherosclerotic heart disease of native coronary artery with unstable angina pectoris"
+      }
+    },
+    {
+      "name": "stub_age_20",
+      "format": "stub",
+      "identifier": "AML001C2to01MA2",
+      "human_width": 5,
+      "stub_width": 3,
+      "expected": {
+        "study": "AML",
+        "subject_id": "1",
+        "type": "Case",
+        "condition": "I25.110",
+        "sex": "Male",
+        "age_group": "Age20to29",
+        "condition_name": "Atherosclerotic heart disease of native coronary artery with unstable angina pectoris"
+      }
+    },
+    {
+      "name": "stub_age_30",
+      "format": "stub",
+      "identifier": "AML001C2to01MA3",
+      "human_width": 5,
+      "stub_width": 3,
+      "expected": {
+        "study": "AML",
+        "subject_id": "1",
+        "type": "Case",
+        "condition": "I25.110",
+        "sex": "Male",
+        "age_group": "Age30to39",
+        "condition_name": "Atherosclerotic heart disease of native coronary artery with unstable angina pectoris"
+      }
+    },
+    {
+      "name": "stub_age_40",
+      "format": "stub",
+      "identifier": "AML001C2to01MA4",
+      "human_width": 5,
+      "stub_width": 3,
+      "expected": {
+        "study": "AML",
+        "subject_id": "1",
+        "type": "Case",
+        "condition": "I25.110",
+        "sex": "Male",
+        "age_group": "Age40to49",
+        "condition_name": "Atherosclerotic heart disease of native coronary artery with unstable angina pectoris"
+      }
+    },
+    {
+      "name": "stub_age_50",
+      "format": "stub",
+      "identifier": "AML001C2to01MA5",
+      "human_width": 5,
+      "stub_width": 3,
+      "expected": {
+        "study": "AML",
+        "subject_id": "1",
+        "type": "Case",
+        "condition": "I25.110",
+        "sex": "Male",
+        "age_group": "Age50to59",
+        "condition_name": "Atherosclerotic heart disease of native coronary artery with unstable angina pectoris"
+      }
+    },
+    {
+      "name": "stub_age_60",
+      "format": "stub",
+      "identifier": "AML001C2to01MA6",
+      "human_width": 5,
+      "stub_width": 3,
+      "expected": {
+        "study": "AML",
+        "subject_id": "1",
+        "type": "Case",
+        "condition": "I25.110",
+        "sex": "Male",
+        "age_group": "Age60to69",
+        "condition_name": "Atherosclerotic heart disease of native coronary artery with unstable angina pectoris"
+      }
+    },
+    {
+      "name": "stub_age_70",
+      "format": "stub",
+      "identifier": "AML001C2to01MA7",
+      "human_width": 5,
+      "stub_width": 3,
+      "expected": {
+        "study": "AML",
+        "subject_id": "1",
+        "type": "Case",
+        "condition": "I25.110",
+        "sex": "Male",
+        "age_group": "Age70to79",
+        "condition_name": "Atherosclerotic heart disease of native coronary artery with unstable angina pectoris"
+      }
+    },
+    {
+      "name": "stub_age_80",
+      "format": "stub",
+      "identifier": "AML001C2to01MA8",
+      "human_width": 5,
+      "stub_width": 3,
+      "expected": {
+        "study": "AML",
+        "subject_id": "1",
+        "type": "Case",
+        "condition": "I25.110",
+        "sex": "Male",
+        "age_group": "Age80to89",
+        "condition_name": "Atherosclerotic heart disease of native coronary artery with unstable angina pectoris"
+      }
+    },
+    {
+      "name": "stub_age_90",
+      "format": "stub",
+      "identifier": "AML001C2to01MA9",
+      "human_width": 5,
+      "stub_width": 3,
+      "expected": {
+        "study": "AML",
+        "subject_id": "1",
+        "type": "Case",
+        "condition": "I25.110",
+        "sex": "Male",
+        "age_group": "Age90to99",
+        "condition_name": "Atherosclerotic heart disease of native coronary artery with unstable angina pectoris"
+      }
+    },
+    {
+      "name": "stub_custom_width",
+      "format": "stub",
+      "identifier": "AML264WC2to01MA4",
+      "human_width": 7,
+      "stub_width": 4,
+      "expected": {
+        "study": "AML",
+        "subject_id": "500000",
+        "type": "Case",
+        "condition": "I25.110",
+        "sex": "Male",
+        "age_group": "Age40to49",
+        "condition_name": "Atherosclerotic heart disease of native coronary artery with unstable angina pectoris"
+      }
+    },
+    {
+      "name": "stub_boundary",
+      "format": "stub",
+      "identifier": "AMLzzzC2to01MA4",
+      "human_width": 5,
+      "stub_width": 3,
+      "expected": {
+        "study": "AML",
+        "subject_id": "238327",
+        "type": "Case",
+        "condition": "I25.110",
+        "sex": "Male",
+        "age_group": "Age40to49",
+        "condition_name": "Atherosclerotic heart disease of native coronary artery with unstable angina pectoris"
+      }
+    }
+  ]
+}
