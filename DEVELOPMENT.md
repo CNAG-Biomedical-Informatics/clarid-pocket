@@ -2,6 +2,8 @@
 
 Build instructions, device checks, and implementation details.
 For installation and everyday use, see [README.md](README.md).
+For the native SwiftUI app, Xcode setup, and Swift tests, see the
+[iOS instructions](ios/README.md).
 
 ## Build
 

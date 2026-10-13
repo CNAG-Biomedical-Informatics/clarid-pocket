@@ -1,0 +1,664 @@
+{
+  "entities": {
+    "_defaults": {
+      "Not Available": {
+        "code": "NAV",
+        "id": "NCIT:C126101",
+        "label": "Not Available",
+        "stub_code": "n"
+      },
+      "Unknown": {
+        "code": "UNK",
+        "id": "NCIT:C17998",
+        "label": "Unknown",
+        "stub_code": "U"
+      }
+    },
+    "biosample": {
+      "assay": {
+        "ATAC_seq": {
+          "code": "ATAC",
+          "id": "EFO:0007045",
+          "label": "ATAC-seq",
+          "stub_code": "A"
+        },
+        "ChIP_seq": {
+          "code": "CHI",
+          "id": "EFO:0002692",
+          "label": "ChIP-seq",
+          "stub_code": "C"
+        },
+        "ELISA": {
+          "code": "ELS",
+          "id": "NCIT:C17455",
+          "label": "Enzyme Immunoassay",
+          "stub_code": "L"
+        },
+        "FlowCytometry": {
+          "code": "FCM",
+          "id": "NCIT:C16585",
+          "label": "Flow Cytometry",
+          "stub_code": "F"
+        },
+        "HiC": {
+          "code": "HIC",
+          "id": "EFO:0007693",
+          "label": "Hi-C",
+          "stub_code": "HI"
+        },
+        "IHC": {
+          "code": "IHC",
+          "id": "EFO:0022943",
+          "label": "Immunohistochemistry",
+          "stub_code": "I"
+        },
+        "LC_MS": {
+          "code": "LCMS",
+          "id": "NCIT:C18475",
+          "label": "Liquid Chromatography Mass Spectrometry",
+          "stub_code": "S"
+        },
+        "Metabolomics": {
+          "code": "METB",
+          "id": "NCIT:C49019",
+          "label": "Metabolomics",
+          "stub_code": "B"
+        },
+        "Microarray": {
+          "code": "ARR",
+          "id": "NCIT:C44282",
+          "label": "Microarray",
+          "stub_code": "X"
+        },
+        "Proteomics": {
+          "code": "PRO",
+          "id": "NCIT:C20085",
+          "label": "Proteomics",
+          "stub_code": "P"
+        },
+        "RNA_seq": {
+          "code": "RNA",
+          "id": "EFO:0008896",
+          "label": "RNA-seq",
+          "stub_code": "R"
+        },
+        "WES": {
+          "code": "WES",
+          "id": "EFO:0005396",
+          "label": "Exome sequencing",
+          "stub_code": "E"
+        },
+        "WGBS": {
+          "code": "WGB",
+          "id": "EFO:0008985",
+          "label": "WGBS",
+          "stub_code": "G"
+        },
+        "WGS": {
+          "code": "WGS",
+          "id": "NCIT:C101294",
+          "label": "Whole Genome Sequencing",
+          "stub_code": "Z"
+        },
+        "WesternBlot": {
+          "code": "WBL",
+          "id": "OBI:0000854",
+          "label": "western blot assay",
+          "stub_code": "W"
+        },
+        "ddPCR": {
+          "code": "DDP",
+          "id": "NCIT:C166064",
+          "label": "Droplet Digital PCR",
+          "stub_code": "D"
+        },
+        "qPCR": {
+          "code": "QPCR",
+          "id": "AFP:0003769",
+          "label": "quantitative polymerase chain reaction",
+          "stub_code": "Q"
+        },
+        "scATAC_seq": {
+          "code": "SCAT",
+          "id": "EFO:0010891",
+          "label": "ScATAC-seq",
+          "stub_code": "T"
+        },
+        "scRNA_seq": {
+          "code": "SCR",
+          "id": "EFO:0008913",
+          "label": "Single-cell RNA sequencing",
+          "stub_code": "N"
+        }
+      },
+      "batch_pattern": {
+        "code_format": "B%02d",
+        "regex": "^(\\d{1,2})$",
+        "stub_format": "B%02d"
+      },
+      "condition_pattern": {
+        "code_format": "%s",
+        "regex": "^([A-Z]\\d{2}(?:\\.\\d+)?)$",
+        "stub_format": "%s"
+      },
+      "duration_pattern": {
+        "code_format": "P%d%s",
+        "regex": "^(?:P?(\\d)([DWMY])|P?(0)(N))$",
+        "stub_format": "%d%s"
+      },
+      "project": {
+        "CNAG-Test": {
+          "code": "CNAG_Test",
+          "id": "NCIT:C17998",
+          "label": "CNAG test project for ClarID-Tools",
+          "stub_code": "CT"
+        },
+        "TARGET-AML": {
+          "code": "TARGET_AML",
+          "id": "NCIT:C17998",
+          "label": "TARGET’s Study of Acute Myeloid Leukemia",
+          "stub_code": "TAML"
+        },
+        "TCGA-AML": {
+          "code": "TCGA_AML",
+          "id": "NCIT:C17998",
+          "label": "TCGA Acute Myeloid Leukemia",
+          "stub_code": "AML"
+        }
+      },
+      "replicate_pattern": {
+        "code_format": "R%02d",
+        "regex": "^(\\d{1,2})$",
+        "stub_format": "R%02d"
+      },
+      "sample_type": {
+        "Normal": {
+          "code": "NOR",
+          "id": "PATO:0000461",
+          "label": "Normal",
+          "stub_code": "N"
+        },
+        "Primary": {
+          "code": "PRI",
+          "id": "NCIT:C172602",
+          "label": "Primary Tumor Site Indicator",
+          "stub_code": "P"
+        },
+        "Recurrence": {
+          "code": "REC",
+          "id": "NCIT:C4798",
+          "label": "Recurrent Neoplasm",
+          "stub_code": "R"
+        },
+        "Tumor": {
+          "code": "TUM",
+          "id": "NCIT:C3262",
+          "label": "Neoplasm",
+          "stub_code": "T"
+        }
+      },
+      "species": {
+        "AfricanClawedFrog": {
+          "code": "XenLae",
+          "id": "NCBITaxon:8355",
+          "label": "Xenopus laevis",
+          "stub_code": "0J",
+          "tax_code": "AAP"
+        },
+        "Chicken": {
+          "code": "GalGal",
+          "id": "NCBITaxon:9031",
+          "label": "Gallus gallus",
+          "stub_code": "0C",
+          "tax_code": "AGP"
+        },
+        "CommonMarmoset": {
+          "code": "CalJac",
+          "id": "NCBITaxon:9483",
+          "label": "Callithrix jacchus",
+          "stub_code": "0G",
+          "tax_code": "MCP"
+        },
+        "Cow": {
+          "code": "BosTau",
+          "id": "NCBITaxon:9913",
+          "label": "Bos taurus",
+          "stub_code": "0B",
+          "tax_code": "MAB"
+        },
+        "CynomolgusMacaque": {
+          "code": "MacFas",
+          "id": "NCBITaxon:9543",
+          "label": "Macaca fascicularis",
+          "stub_code": "0F",
+          "tax_code": "MPC"
+        },
+        "Dog": {
+          "code": "CanLup",
+          "id": "NCBITaxon:9615",
+          "label": "Canis lupus familiaris",
+          "stub_code": "09",
+          "tax_code": "MCC"
+        },
+        "Ecoli": {
+          "code": "EscCol",
+          "id": "NCBITaxon:562",
+          "label": "Escherichia coli",
+          "stub_code": "08",
+          "tax_code": "GEE"
+        },
+        "Ferret": {
+          "code": "MusPut",
+          "id": "NCBITaxon:9612",
+          "label": "Mustela putorius furo",
+          "stub_code": "0K",
+          "tax_code": "MCM"
+        },
+        "Fruitfly": {
+          "code": "DroMel",
+          "id": "NCBITaxon:7227",
+          "label": "Drosophila melanogaster",
+          "stub_code": "05",
+          "tax_code": "IDD"
+        },
+        "GoldenHamster": {
+          "code": "MesAur",
+          "id": "NCBITaxon:10036",
+          "label": "Mesocricetus auratus",
+          "stub_code": "0I",
+          "tax_code": "MRC"
+        },
+        "GuineaPig": {
+          "code": "CavPor",
+          "id": "NCBITaxon:10141",
+          "label": "Cavia porcellus",
+          "stub_code": "0H",
+          "tax_code": "MRC"
+        },
+        "Human": {
+          "code": "HomSap",
+          "id": "NCBITaxon:9606",
+          "label": "Homo sapiens",
+          "stub_code": "01",
+          "tax_code": "MPH"
+        },
+        "Mouse": {
+          "code": "MusMus",
+          "id": "NCBITaxon:10090",
+          "label": "Mus musculus",
+          "stub_code": "02",
+          "tax_code": "MRM"
+        },
+        "NakedMoleRat": {
+          "code": "HetGla",
+          "id": "NCBITaxon:314479",
+          "label": "Heterocephalus glaber",
+          "stub_code": "0L",
+          "tax_code": "MRB"
+        },
+        "Opossum": {
+          "code": "MonDom",
+          "id": "NCBITaxon:13710",
+          "label": "Monodelphis domestica",
+          "stub_code": "0M",
+          "tax_code": "MDD"
+        },
+        "Pig": {
+          "code": "SusScr",
+          "id": "NCBITaxon:9823",
+          "label": "Sus scrofa",
+          "stub_code": "0A",
+          "tax_code": "MAS"
+        },
+        "Rabbit": {
+          "code": "OryCun",
+          "id": "NCBITaxon:9986",
+          "label": "Oryctolagus cuniculus",
+          "stub_code": "0D",
+          "tax_code": "MLL"
+        },
+        "Rat": {
+          "code": "RatNor",
+          "id": "NCBITaxon:10116",
+          "label": "Rattus norvegicus",
+          "stub_code": "03",
+          "tax_code": "MRM"
+        },
+        "RhesusMacaque": {
+          "code": "MacMul",
+          "id": "NCBITaxon:9544",
+          "label": "Macaca mulatta",
+          "stub_code": "0E",
+          "tax_code": "MPC"
+        },
+        "Unknown": {
+          "code": "UnkNow",
+          "id": "NCIT:C17998",
+          "label": "Unknown",
+          "stub_code": "00",
+          "tax_code": "UNK"
+        },
+        "Worm": {
+          "code": "CaeEle",
+          "id": "NCBITaxon:6239",
+          "label": "Caenorhabditis elegans",
+          "stub_code": "06",
+          "tax_code": "CRR"
+        },
+        "Yeast": {
+          "code": "SacCer",
+          "id": "NCBITaxon:4932",
+          "label": "Saccharomyces cerevisiae",
+          "stub_code": "07",
+          "tax_code": "SSS"
+        },
+        "Zebrafish": {
+          "code": "DanRer",
+          "id": "NCBITaxon:7955",
+          "label": "Danio rerio",
+          "stub_code": "04",
+          "tax_code": "ACC"
+        }
+      },
+      "timepoint": {
+        "Baseline": {
+          "code": "BSL",
+          "id": "NCIT:C25213",
+          "label": "Baseline",
+          "stub_code": "B"
+        },
+        "Challenge": {
+          "code": "CHL",
+          "id": "NCIT:C78166",
+          "label": "Challenge",
+          "stub_code": "C"
+        },
+        "Collection": {
+          "code": "COL",
+          "id": "NCIT:C81287",
+          "label": "Collection Time",
+          "stub_code": "CT"
+        },
+        "Surgery": {
+          "code": "SUR",
+          "id": "NCIT:C17998",
+          "label": "Surgery",
+          "stub_code": "S"
+        },
+        "Treatment": {
+          "code": "TRT",
+          "id": "NCIT:C165209",
+          "label": "Treatment Ongoing",
+          "stub_code": "T"
+        }
+      },
+      "tissue": {
+        "AdiposeTissue": {
+          "code": "ADT",
+          "id": "UBERON:0001013",
+          "label": "Adipose tissue",
+          "stub_code": "A"
+        },
+        "Blood": {
+          "code": "BLO",
+          "id": "UBERON:0000178",
+          "label": "Blood",
+          "stub_code": "B"
+        },
+        "Bone": {
+          "code": "BNE",
+          "id": "BTO:0000140",
+          "label": "Bone",
+          "stub_code": "O"
+        },
+        "BoneMarrow": {
+          "code": "BMR",
+          "id": "UBERON:0002371",
+          "label": "Bone marrow",
+          "stub_code": "R"
+        },
+        "Brain": {
+          "code": "BRN",
+          "id": "UBERON:0000955",
+          "label": "Brain",
+          "stub_code": "N"
+        },
+        "Colon": {
+          "code": "CLN",
+          "id": "UBERON:0000059",
+          "label": "Colon",
+          "stub_code": "C"
+        },
+        "DerivedCellLine": {
+          "code": "DCL",
+          "id": "NCIT:C156445",
+          "label": "Derived Cell Line",
+          "stub_code": "DC"
+        },
+        "Heart": {
+          "code": "HRT",
+          "id": "UBERON:0000948",
+          "label": "Heart",
+          "stub_code": "H"
+        },
+        "Intestine": {
+          "code": "INT",
+          "id": "UBERON:0000160",
+          "label": "Intestine",
+          "stub_code": "E"
+        },
+        "Kidney": {
+          "code": "KID",
+          "id": "UBERON:0002113",
+          "label": "Kidney",
+          "stub_code": "K"
+        },
+        "Liver": {
+          "code": "LIV",
+          "id": "UBERON:0002107",
+          "label": "Liver",
+          "stub_code": "L"
+        },
+        "Lung": {
+          "code": "LUN",
+          "id": "UBERON:0002048",
+          "label": "Lung",
+          "stub_code": "LU"
+        },
+        "Muscle": {
+          "code": "MSC",
+          "id": "BTO:0000887",
+          "label": "Muscle",
+          "stub_code": "V"
+        },
+        "Pancreas": {
+          "code": "PNC",
+          "id": "UBERON:0001264",
+          "label": "Pancreas",
+          "stub_code": "P"
+        },
+        "PeripheralBlood": {
+          "code": "PBLO",
+          "id": "BTO:0000553",
+          "label": "Peripheral Blood",
+          "stub_code": "PB"
+        },
+        "Skin": {
+          "code": "SKN",
+          "id": "UBERON:0002097",
+          "label": "Skin",
+          "stub_code": "I"
+        },
+        "Spleen": {
+          "code": "SPL",
+          "id": "UBERON:0002106",
+          "label": "Spleen",
+          "stub_code": "S"
+        },
+        "Stomach": {
+          "code": "STM",
+          "id": "UBERON:0000945",
+          "label": "Stomach",
+          "stub_code": "M"
+        },
+        "Tumor": {
+          "code": "TUM",
+          "id": "NCIT:C3262",
+          "label": "Neoplasm",
+          "stub_code": "T"
+        }
+      }
+    },
+    "subject": {
+      "age_group": {
+        "Age0to9": {
+          "code": "A0_9",
+          "id": "APOLLO:SV_00000241",
+          "label": "Age 0-9",
+          "stub_code": "A0"
+        },
+        "Age10to19": {
+          "code": "A10_19",
+          "id": "APOLLO:SV_00000241",
+          "label": "Age 10-19",
+          "stub_code": "A1"
+        },
+        "Age20to29": {
+          "code": "A20_29",
+          "id": "APOLLO:SV_00000241",
+          "label": "Age 20-29",
+          "stub_code": "A2"
+        },
+        "Age30to39": {
+          "code": "A30_39",
+          "id": "APOLLO:SV_00000241",
+          "label": "Age 30-39",
+          "stub_code": "A3"
+        },
+        "Age40to49": {
+          "code": "A40_49",
+          "id": "APOLLO:SV_00000241",
+          "label": "Age 40-49",
+          "stub_code": "A4"
+        },
+        "Age50to59": {
+          "code": "A50_59",
+          "id": "APOLLO:SV_00000241",
+          "label": "Age 50-59",
+          "stub_code": "A5"
+        },
+        "Age60to69": {
+          "code": "A60_69",
+          "id": "APOLLO:SV_00000241",
+          "label": "Age 60-69",
+          "stub_code": "A6"
+        },
+        "Age70to79": {
+          "code": "A70_79",
+          "id": "APOLLO:SV_00000241",
+          "label": "Age 70-79",
+          "stub_code": "A7"
+        },
+        "Age80to89": {
+          "code": "A80_89",
+          "id": "APOLLO:SV_00000241",
+          "label": "Age 80-89",
+          "stub_code": "A8"
+        },
+        "Age90to99": {
+          "code": "A90_99",
+          "id": "APOLLO:SV_00000241",
+          "label": "Age 90-99",
+          "stub_code": "A9"
+        },
+        "Not Available": {
+          "code": "NAV",
+          "id": "NCIT:C126101",
+          "label": "Not Available",
+          "stub_code": "NA"
+        },
+        "Unknown": {
+          "code": "UNK",
+          "id": "NCIT:C17998",
+          "label": "Unknown",
+          "stub_code": "UN"
+        }
+      },
+      "condition_pattern": {
+        "code_format": "%s",
+        "regex": "^([A-Z]\\d{2}(?:\\.\\d+)?)$",
+        "stub_format": "%s"
+      },
+      "sex": {
+        "Female": {
+          "code": "Female",
+          "id": "PATO:0000383",
+          "label": "Female",
+          "stub_code": "F"
+        },
+        "Male": {
+          "code": "Male",
+          "id": "PATO:0000384",
+          "label": "Male",
+          "stub_code": "M"
+        },
+        "Not reported": {
+          "code": "NotR",
+          "id": "NCIT:C43234",
+          "label": "Not Reported",
+          "stub_code": "N"
+        },
+        "Unspecified": {
+          "code": "Uns",
+          "id": "NCIT:C38046",
+          "label": "Unspecified",
+          "stub_code": "S"
+        }
+      },
+      "study": {
+        "CNAG-Test": {
+          "code": "CNAG_Test",
+          "id": "NCIT:C17998",
+          "label": "CNAG test project for ClarID-Tools",
+          "stub_code": "CT"
+        },
+        "TARGET-AML": {
+          "code": "TARGET_AML",
+          "id": "NCIT:C17998",
+          "label": "TARGET’s Study of Acute Myeloid Leukemia",
+          "stub_code": "TAML"
+        },
+        "TCGA-AML": {
+          "code": "TCGA_AML",
+          "id": "NCIT:C17998",
+          "label": "TCGA Acute Myeloid Leukemia",
+          "stub_code": "AML"
+        }
+      },
+      "type": {
+        "Case": {
+          "code": "Case",
+          "id": "NCIT:C15362",
+          "label": "Case Study",
+          "stub_code": "C"
+        },
+        "Control": {
+          "code": "Control",
+          "id": "NCIT:C142703",
+          "label": "Study Control",
+          "stub_code": "N"
+        }
+      }
+    }
+  },
+  "metadata": {
+    "author": "Manuel Rueda <manuel.rueda@cnag.eu>",
+    "center": "CNAG",
+    "date": "2026-07-12",
+    "description": "CNAG's ClarID codebook.",
+    "local_version": "CNAG-2026.07.12",
+    "repository": "https://github.com/cnag-biomedical-informatics/clarid-tools",
+    "version": "0.04"
+  },
+  "source_sha256": "95ad54755f4de333f8eca304a86f371f86ff1d57e0bc7a41483e7f4d952baa8a"
+}
